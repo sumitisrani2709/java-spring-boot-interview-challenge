@@ -1,4 +1,4 @@
-package com.example.cabbooking.web;
+package com.example.cabbooking.controller;
 
 import com.example.cabbooking.dto.CreateRideRequest;
 import com.example.cabbooking.dto.RideResponse;

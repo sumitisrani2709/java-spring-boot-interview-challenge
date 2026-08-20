@@ -1,7 +1,7 @@
 package com.example.cabbooking.repository;
 
-import com.example.cabbooking.domain.RideRequest;
-import com.example.cabbooking.domain.RideStatus;
+import com.example.cabbooking.entity.RideRequest;
+import com.example.cabbooking.entity.enums.RideStatus;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

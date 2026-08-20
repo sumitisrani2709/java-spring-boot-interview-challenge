@@ -1,8 +1,8 @@
 package com.example.cabbooking.service;
 
-import com.example.cabbooking.domain.DriverStatus;
-import com.example.cabbooking.domain.RideRequest;
-import com.example.cabbooking.domain.RideStatus;
+import com.example.cabbooking.entity.enums.DriverStatus;
+import com.example.cabbooking.entity.RideRequest;
+import com.example.cabbooking.entity.enums.RideStatus;
 import com.example.cabbooking.dto.CreateRideRequest;
 import com.example.cabbooking.dto.Location;
 import com.example.cabbooking.dto.RideResponse;
@@ -33,12 +33,6 @@ public class RideService {
         this.rideAssignmentService = rideAssignmentService;
     }
 
-    /**
-     * Creates a ride request and immediately tries to assign the nearest available driver.
-     *
-     * <p>The ride row is committed before assignment is attempted, so a request that
-     * finds no driver is still recorded as {@code REQUESTED} and can be retried.
-     */
     public RideResponse requestRide(CreateRideRequest request) {
         Objects.requireNonNull(request, "request must not be null");
 
@@ -56,18 +50,17 @@ public class RideService {
         return rideRequestRepository.findById(rideId).orElseThrow(() -> new RideNotFoundException(rideId));
     }
 
-    /** Cancels a ride and, if a driver was already on the hook, releases them. */
     @Transactional
     public RideRequest cancelRide(Long rideId) {
         RideRequest ride = rideRequestRepository.findById(rideId)
                 .orElseThrow(() -> new RideNotFoundException(rideId));
 
-        if (ride.getStatus() == RideStatus.DRIVER_ASSIGNED && ride.getAssignedDriverId() != null) {
-            driverRepository.findByIdForUpdate(ride.getAssignedDriverId())
+        if ((ride.getStatus() == RideStatus.DRIVER_ASSIGNED && ride.getAssignedDriverId() != null) || ride.getStatus() == RideStatus.REQUESTED) {
+            driverRepository.findById(ride.getAssignedDriverId())
                     .ifPresent(driver -> driver.setStatus(DriverStatus.AVAILABLE));
+            ride.setStatus(RideStatus.CANCELLED);
         }
 
-        ride.setStatus(RideStatus.CANCELLED);
         return ride;
     }
 }

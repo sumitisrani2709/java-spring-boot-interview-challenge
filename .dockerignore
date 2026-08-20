@@ -1,0 +1,24 @@
+# Build output — the image builds its own
+build/
+out/
+bin/
+.gradle/
+
+# VCS and IDE
+.git/
+.gitignore
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# Docs and scratch — not needed to build or run
+*.md
+!README.md
+temp*.md
+
+# OS noise
+.DS_Store
+Thumbs.db

@@ -1,6 +1,6 @@
 package com.example.cabbooking.exception;
 
-import com.example.cabbooking.domain.RideStatus;
+import com.example.cabbooking.entity.enums.RideStatus;
 
 /** Thrown when a ride is not in a state that allows a driver to be assigned. */
 public class RideAlreadyAssignedException extends RuntimeException {

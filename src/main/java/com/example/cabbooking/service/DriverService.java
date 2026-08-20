@@ -1,7 +1,7 @@
 package com.example.cabbooking.service;
 
-import com.example.cabbooking.domain.Driver;
-import com.example.cabbooking.domain.DriverStatus;
+import com.example.cabbooking.entity.Driver;
+import com.example.cabbooking.entity.enums.DriverStatus;
 import com.example.cabbooking.exception.DriverNotFoundException;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class DriverService {
 
     @Transactional
     public Driver updateStatus(Long driverId, DriverStatus status) {
-        Driver driver = driverRepository.findByIdForUpdate(driverId)
+        Driver driver = driverRepository.findById(driverId)
                 .orElseThrow(() -> new DriverNotFoundException(driverId));
         driver.setStatus(status);
         return driver;

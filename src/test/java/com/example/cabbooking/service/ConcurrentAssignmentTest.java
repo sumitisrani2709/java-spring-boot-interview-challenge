@@ -2,10 +2,10 @@ package com.example.cabbooking.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.cabbooking.domain.Driver;
-import com.example.cabbooking.domain.DriverStatus;
-import com.example.cabbooking.domain.RideRequest;
-import com.example.cabbooking.domain.RideStatus;
+import com.example.cabbooking.entity.Driver;
+import com.example.cabbooking.entity.enums.DriverStatus;
+import com.example.cabbooking.entity.RideRequest;
+import com.example.cabbooking.entity.enums.RideStatus;
 import com.example.cabbooking.repository.DriverRepository;
 import com.example.cabbooking.repository.RideRequestRepository;
 import java.util.ArrayList;

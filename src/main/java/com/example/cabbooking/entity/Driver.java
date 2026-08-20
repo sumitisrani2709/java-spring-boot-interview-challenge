@@ -1,6 +1,7 @@
-package com.example.cabbooking.domain;
+package com.example.cabbooking.entity;
 
 import com.example.cabbooking.dto.Location;
+import com.example.cabbooking.entity.enums.DriverStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
-import jakarta.persistence.Version;
 
 @Entity
 @Table(name = "driver", indexes = @Index(name = "idx_driver_status", columnList = "status"))
@@ -33,15 +33,7 @@ public class Driver {
     @Column(nullable = false, length = 16)
     private DriverStatus status;
 
-    /**
-     * JPA optimistic-locking version. Hibernate bumps this on every update and fails
-     * with an {@code OptimisticLockingFailureException} if the row changed underneath us.
-     */
-    @Version
-    private Long version;
-
     protected Driver() {
-        // required by JPA
     }
 
     public Driver(String name, double latitude, double longitude, DriverStatus status) {
@@ -51,7 +43,6 @@ public class Driver {
         this.status = status;
     }
 
-    /** Convenience accessor so distance code can work with a single value object. */
     public Location location() {
         return new Location(latitude, longitude);
     }
@@ -90,10 +81,6 @@ public class Driver {
 
     public void setStatus(DriverStatus status) {
         this.status = status;
-    }
-
-    public Long getVersion() {
-        return version;
     }
 
     @Override

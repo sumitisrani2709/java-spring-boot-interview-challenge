@@ -9,10 +9,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
-import com.example.cabbooking.domain.Driver;
-import com.example.cabbooking.domain.DriverStatus;
-import com.example.cabbooking.domain.RideRequest;
-import com.example.cabbooking.domain.RideStatus;
+import com.example.cabbooking.entity.Driver;
+import com.example.cabbooking.entity.enums.DriverStatus;
+import com.example.cabbooking.entity.RideRequest;
+import com.example.cabbooking.entity.enums.RideStatus;
 import com.example.cabbooking.dto.CreateRideRequest;
 import com.example.cabbooking.dto.RideResponse;
 import com.example.cabbooking.exception.InvalidLocationException;
@@ -90,7 +90,7 @@ class RideServiceTest {
         RideRequest ride = rideWithId(5L, RideStatus.DRIVER_ASSIGNED, 12L);
         Driver driver = new Driver("Assigned", 28.6, 77.2, DriverStatus.BUSY);
         when(rideRequestRepository.findById(5L)).thenReturn(Optional.of(ride));
-        when(driverRepository.findByIdForUpdate(12L)).thenReturn(Optional.of(driver));
+        when(driverRepository.findById(12L)).thenReturn(Optional.of(driver));
 
         RideRequest cancelled = rideService.cancelRide(5L);
 
@@ -106,7 +106,7 @@ class RideServiceTest {
 
         assertThat(rideService.cancelRide(5L).getStatus()).isEqualTo(RideStatus.CANCELLED);
 
-        verify(driverRepository, never()).findByIdForUpdate(anyLong());
+        verify(driverRepository, never()).findById(anyLong());
     }
 
     private RideRequest rideWithId(Long id, RideStatus status, Long assignedDriverId) {

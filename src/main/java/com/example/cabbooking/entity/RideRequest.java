@@ -1,6 +1,7 @@
-package com.example.cabbooking.domain;
+package com.example.cabbooking.entity;
 
 import com.example.cabbooking.dto.Location;
+import com.example.cabbooking.entity.enums.RideStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,14 +32,9 @@ public class RideRequest {
     @Column(nullable = false, length = 24)
     private RideStatus status;
 
-    /**
-     * Deliberately a plain id rather than a {@code @ManyToOne} association - keeps the
-     * entity graph flat and the JPA behaviour easy to reason about for this exercise.
-     */
     private Long assignedDriverId;
 
     protected RideRequest() {
-        // required by JPA
     }
 
     public RideRequest(Long customerId, double pickupLatitude, double pickupLongitude) {

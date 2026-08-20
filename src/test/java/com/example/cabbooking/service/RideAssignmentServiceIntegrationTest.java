@@ -3,10 +3,10 @@ package com.example.cabbooking.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.example.cabbooking.domain.Driver;
-import com.example.cabbooking.domain.DriverStatus;
-import com.example.cabbooking.domain.RideRequest;
-import com.example.cabbooking.domain.RideStatus;
+import com.example.cabbooking.entity.Driver;
+import com.example.cabbooking.entity.enums.DriverStatus;
+import com.example.cabbooking.entity.RideRequest;
+import com.example.cabbooking.entity.enums.RideStatus;
 import com.example.cabbooking.exception.NoDriverAvailableException;
 import com.example.cabbooking.exception.RideAlreadyAssignedException;
 import com.example.cabbooking.exception.RideNotFoundException;

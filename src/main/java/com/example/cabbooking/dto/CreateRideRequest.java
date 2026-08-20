@@ -4,7 +4,6 @@ import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 
-/** Payload for {@code POST /api/rides}. */
 public record CreateRideRequest(
 
         @NotNull(message = "customerId is required")

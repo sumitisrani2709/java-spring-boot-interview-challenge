@@ -2,12 +2,6 @@ package com.example.cabbooking.dto;
 
 import com.example.cabbooking.exception.InvalidLocationException;
 
-/**
- * Immutable geographic point in decimal degrees (WGS84).
- *
- * <p>Validation lives in the value object itself so that an invalid {@code Location}
- * can never exist anywhere in the system.
- */
 public record Location(double latitude, double longitude) {
 
     public static final double MIN_LATITUDE = -90.0;
